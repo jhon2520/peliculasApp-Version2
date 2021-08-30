@@ -11,6 +11,10 @@ class PopularProvider extends ChangeNotifier{
   String _apiKey            = "a27fc2203f51a1bb39546fb877cdac6a";
   String _language          = "es-ES";
   List<Movie> popularList   = [];
+  //voy a tener una variable que va aumentando cada vez que se llame el método
+  //para obtener las películas populares y así tener todas las películas, no sólo 
+  //las de la página 1
+  int _popularPage = 0;
 
 
   PopularProvider(){
@@ -18,12 +22,15 @@ class PopularProvider extends ChangeNotifier{
   }
 
 
-  void getPopulares()async {
+  void getPopulares([int page = 1])async {
+
+    _popularPage++;
 
     final url = Uri.https(_authority, _unencodedPath, {
 
-      'api_key': _apiKey,
+      'api_key' : _apiKey,
       'language': _language,
+      "page"    : '$_popularPage'
     });
 
     final response = await http.get(url);

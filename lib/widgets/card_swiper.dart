@@ -38,8 +38,10 @@ class CardSwiper extends StatelessWidget {
           final Movie movie = movies[index];
 
           return GestureDetector(
-            onDoubleTap: (){
-              Navigator.pushNamed(context, "details",arguments: "Argumento");
+            onTap: (){
+              //le paso como argumento la instancia de movie para tener
+              //la información en la siguiente página
+              Navigator.pushNamed(context, "details",arguments: movie);
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),

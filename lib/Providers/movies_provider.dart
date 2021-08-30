@@ -18,11 +18,11 @@ class MoviesProvider extends ChangeNotifier{
 
   
 
-  getNowPlayingMovies() async{
+  void getNowPlayingMovies([int page = 1]) async{
     final url = Uri.https(_baseUrl, "3/movie/now_playing", {
         "api_key" : _apiKey,
         "language": _language,
-        "page"    : "1"
+        "page"    : '$page'
     });
     //get respuesta
     final response = await http.get(url);

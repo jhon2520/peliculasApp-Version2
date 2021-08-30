@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas_app_v2/Providers/credits_provider.dart';
 import 'package:peliculas_app_v2/Providers/popular_provider.dart';
 import 'package:provider/provider.dart';
 import 'Screens/screens.dart';
@@ -14,14 +15,14 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return MultiProvider(
       providers: [
         //por defecto, la opcion lazy en true hace que no se ejecute el constructor
         //de la clase moviesprovider hasta que haya una instancia, en este caso si quiero
         //que se ejecute el constructor de una entonces pongo lazy:false
         ChangeNotifierProvider(create: (_)=> MoviesProvider(), lazy: false,),
-        ChangeNotifierProvider(create: (_)=> PopularProvider(), lazy: false,)
+        ChangeNotifierProvider(create: (_)=> PopularProvider(), lazy: false,),
+        ChangeNotifierProvider(create: (_)=> CreditsProvider(), lazy: true,)
       ],
       child: MyApp(),
       );
@@ -33,6 +34,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
+    CreditsProvider creditsProvider = new CreditsProvider();
+    creditsProvider.getCast('101');
+
+
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Movies App",
